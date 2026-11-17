@@ -226,16 +226,24 @@ const Footer = () => {
         </p>
         <ul className="flex items-center gap-4">
           <li>
-            <a href="#">Privacy </a>
+            <Link
+              to="/privacy-policy"
+              className="transition-colors hover:text-primary"
+            >
+              Privacy
+            </Link>
           </li>
-          <li> | </li>
-          <li>
-            <a href="#">Terms</a>
-          </li>
-          <li> | </li>
+
+          <li aria-hidden="true">|</li>
 
           <li>
-            <a href="#">Cookies</a>
+            <span className="text-muted-foreground">Terms</span>
+          </li>
+
+          <li aria-hidden="true">|</li>
+
+          <li>
+            <span className="text-muted-foreground">Cookies</span>
           </li>
         </ul>
       </motion.div>
