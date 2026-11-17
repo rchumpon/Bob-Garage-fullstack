@@ -35,7 +35,7 @@ const SiteSettings = sequelize.define(
   },
   {
     // Match the existing table name in Aiven MySQL
-    tableName: "siteSettings",
+    tableName: "sitesettings",
   },
 );
 
