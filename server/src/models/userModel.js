@@ -63,5 +63,9 @@ const User = sequelize.define(
   },
   // Automatically adds createdAt and updatedAt fields
   { timestamps: true },
+  {
+    // Match the existing table name in Aiven MySQL
+    tableName: "users",
+  },
 );
 module.exports = User;

@@ -44,6 +44,10 @@ const Favourite = sequelize.define(
       },
     ],
   },
+  {
+    // Match the existing table name in Aiven MySQL
+    tableName: "favourites",
+  },
 );
 console.log(
   "Favourite ID type:",
