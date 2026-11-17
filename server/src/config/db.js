@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const mysql2 = require("mysql2");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -7,9 +8,12 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
-    dialect: process.env.DIALECT || "mysql",
+    dialect: "mysql",
 
-    // Enable SSL when connecting to Aiven
+    // Explicitly provide the MySQL driver
+    dialectModule: mysql2,
+
+    // Aiven MySQL SSL configuration
     dialectOptions: {
       ssl: {
         ca: process.env.DB_CA_CERT?.replace(/\\n/g, "\n"),
