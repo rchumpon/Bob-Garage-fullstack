@@ -35,6 +35,9 @@ const Favourite = sequelize.define(
     // Automatically adds createdAt and updatedAt fields
     timestamps: true,
 
+    // Match the existing table name in Aiven MySQL
+    tableName: "favourites",
+
     // Prevent a user from adding the same service
     // to their favourites more than once
     indexes: [
@@ -44,13 +47,6 @@ const Favourite = sequelize.define(
       },
     ],
   },
-  {
-    // Match the existing table name in Aiven MySQL
-    tableName: "favourites",
-  },
 );
-console.log(
-  "Favourite ID type:",
-  Favourite.getAttributes().favouriteId.type.toSql(),
-);
+
 module.exports = Favourite;
