@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&family=Bitcount:wght@100..900&family=Geist:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital@0;1&display=swap");
+
+@import "tailwindcss";
+
+* {
+  font-family: "Outfit", sans-serif;
+}
+
+/* h1 {
+  color: #f1f5f9;
+  color: #f3f4f6;
+} */
+
+/* Enable class-based dark mode in Tailwind CSS v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Register theme colours with Tailwind */
+@theme inline {
+  --color-background: var(--app-background);
+  --color-foreground: var(--app-foreground);
+
+  --color-card: var(--app-card);
+
+  --color-primary: var(--app-primary);
+  --color-primary-foreground: var(--app-primary-foreground);
+  --color-primary-hover: var(--app-primary-hover);
+
+  --color-secondary: var(--app-secondary);
+  --color-secondary-foreground: var(--app-secondary-foreground);
+
+  --color-muted: var(--app-muted);
+  --color-muted-foreground: var(--app-muted-foreground);
+
+  --color-border: var(--app-border);
+  --color-highlight: var(--app-highlight);
+  --color-surface: var(--app-surface);
+
+  --radius: 0.75rem;
+}
+
+/* Light Theme */
+:root {
+  --app-background: #f8fafc;
+  --app-foreground: #111827;
+
+  --app-card: #ffffff;
+
+  --app-primary: #f97316;
+  --app-primary-foreground: #ffffff;
+  --app-primary-hover: #ea580c;
+
+  --app-secondary: #e5e7eb;
+  --app-secondary-foreground: #c2410c;
+
+  --app-muted: #f1f5f9;
+  --app-muted-foreground: #64748b;
+
+  --app-border: #d1d5db;
+  --app-highlight: #f59e0b;
+  --app-surface: #ffffff;
+}
+
+/* Dark Theme - Your Original Colours */
+.dark {
+  --app-background: #0f1418;
+  --app-foreground: #f3f4f6;
+
+  --app-card: #151a1f;
+
+  --app-primary: #f97316;
+  --app-primary-foreground: #ffffff;
+  --app-primary-hover: #ea580c;
+
+  --app-secondary: #252b31;
+  --app-secondary-foreground: #fb923c;
+
+  --app-muted: #1d242a;
+  --app-muted-foreground: #9ca3af;
+
+  --app-border: #303840;
+  --app-highlight: #f59e0b;
+  --app-surface: #11171c;
+}
+
+@layer components {
+  .glass {
+    background-color: color-mix(in srgb, var(--app-surface) 50%, transparent);
+    backdrop-filter: blur(16px);
+    border: 1px solid color-mix(in srgb, var(--app-border) 50%, transparent);
+  }
+  .glow-border {
+    box-shadow:
+      0 0 20px color-mix(in srgb, var(--app-primary) 20%, transparent),
+      inset 0 0 20px color-mix(in srgb, var(--app-primary) 5%, transparent);
+  }
+
+  @layer utilities {
+    @keyframes slow-drift {
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+      25% {
+        transform: translate(20px, -30px);
+      }
+      50% {
+        transform: translate(-15px, -20px);
+      }
+      75% {
+        transform: translate(30px, 10px);
+      }
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+}
