@@ -63,25 +63,31 @@ app.use("/api/favourite", favouriteRouter);
 // Server Startup
 // ==================================================
 
-const startServer = async () => {
-  try {
-    // Connect to MySQL
-    await sequelize.authenticate();
-    console.log("MySQL connected...");
+// Start the server only when running locally
+if (require.main === module) {
+  const startServer = async () => {
+    try {
+      // Connect to MySQL
+      await sequelize.authenticate();
+      console.log("MySQL connected...");
 
-    // Synchronize Sequelize models with MySQL
-    await sequelize.sync();
+      // Synchronize Sequelize models with MySQL
+      await sequelize.sync();
 
-    // Start Express server
-    app.listen(process.env.PORT, () => {
-      console.log(`Server running on port ${process.env.PORT}`);
-    });
-  } catch (error) {
-    // Handle database connection or synchronization errors
-    console.log("MySQL connection failed:", error);
-    process.exit(1);
-  }
-};
-startServer();
+      // Start Express server
+      const PORT = process.env.PORT || 3001;
 
+      app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+      });
+    } catch (error) {
+      // Handle database connection or synchronization errors
+      console.log("MySQL connection failed:", error);
+      process.exit(1);
+    }
+  };
+  startServer();
+}
+
+// Export Express app for Vercel
 module.exports = app;
