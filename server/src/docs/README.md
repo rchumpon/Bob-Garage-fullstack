@@ -99,14 +99,66 @@ Access: Admin
 
 Booking requests are validated using Joi schemas before reaching the controllers.
 
-5. Authentication and Authorization
+5. Site Settings API Endpoints
+   Base route: /api/settings
+
+Method: GET
+Endpoint: /hero
+Description: Retrieve the saved homepage background and right-side hero image.
+Access: Public
+
+Method: PUT
+Endpoint: /hero/background
+Description: Upload and update the homepage background image.
+Access: Admin
+
+Method: PUT
+Endpoint: /hero/image
+Description: Upload and update the right-side hero image.
+Access: Admin
+
+Images are uploaded to ImageKit and optimized using WebP formatting, automatic quality adjustment and image resizing.
+
+- heroBackground: Homepage background image, optimized to a width of 1920 pixels.
+- heroImage: Right-side hero image, optimized to a width of 800 pixels.
+
+The image URLs are stored in the sitesettings table.
+Temporary uploaded files are deleted after processing.
+
+The GET endpoint is publicly accessible. The update endpoints are intended for administrators only, subject to the authentication and authorization middleware configured in the settings route file.
+
+6. Favourite API Endpoints
+   Base route: /api/favourite
+
+Method: GET
+Endpoint: /list
+Description: Retrieve the logged-in customer's favourite services.
+Access: Authenticated
+
+Method: POST
+Endpoint: /add
+Description: Add a service to the customer's favourites.
+Access: Authenticated
+
+Method: DELETE
+Endpoint: /remove/:serviceId
+Description: Remove a service from the customer's favourites.
+Access: Authenticated
+
+The favouriteController.js handles adding, retrieving and removing favourite services.
+
+All favourite endpoints use the protect authentication middleware to ensure that only authenticated users can access these operations.
+
+The serviceId parameter identifies the service to remove from the customer's favourites.
+
+7. Authentication and Authorization
    The API uses JWT authentication and role-based access control.
 
 - Public: No authentication required.
 - Authenticated: Requires a valid JWT token, verified by the protect middleware.
 - Admin: Required authentication and administrator permission, verified by protect and adminOnly.
 
-6. Request Validation
+8. Request Validation
    The API uses Joi validation middleware to check incoming request data.
 
 User Validation
@@ -128,15 +180,22 @@ Booking Validation
 
 Invalid requests are rejected before the controller executes.
 
-7. Database Operations
+9. Database Operations
    The API uses Sequelize ORM to interact with MySQL.
-   Database: bobs_garage
-   Table: Users, Services, and Bookings
+
+Database: bobs_garage
+Database Tables:
+Users - Stores registered user accounts and authentication information.
+Services - Stores automotive services, descriptions, prices and availability.
+Bookings - Stores customer bookings and booking statuses.
+SiteSettings - Stores homepage background and right-side hero image URLs.
+Favourite - Stores customer favourite service information.
+The exact table or model structure should be confirmed from the favourite controller and model.
 
 Database queries support creating, retrieving, updating and deleting application records.
 
-8. Error Handling
-   The API uses error-handling mechanisms to manage exceptions and return appropriate HTTP responses.
+10. Error Handling
+    The API uses error-handling mechanisms to manage exceptions and return appropriate HTTP responses.
 
 Common status codes include:
 HTTP Status: 200
@@ -160,20 +219,27 @@ Description: Resource not found
 HTTP Status: 500
 Description: Internal server error
 
-9. API Testing
-   Postman is used to test the API endpoints.
-   Testing includes:
+11. API Testing
+    Postman is used to test the API endpoints.
+    Testing includes:
 
 - Verifying successful JSON responses.
 - Testing user registration and login.
 - Testing service CRUD operations.
 - Testing booking creation and status updates.
+- Testing homepage hero settings retrieval.
+- Testing administrator uploads of background and hero images.
+- Verify image URLs are saved in MySQL.
+- Testing the addition, retrieval and removal of favourite services.
+- Testing JWT authentication and administrator permissions.
 - Confirming database changes in MySQL.
 
-10 API Route Files
+12. API Route Files
 
 - src/routes/userRoutes.js
 - src/routes/serviceRoutes.js
 - src/routes/bookingRoutes.js
+- src/routes/siteSettingsRoutes.js
+- src/routes/favouriteRoutes.js
 
 These files define the API endpoints and connect requests to their corresponding controller functions.

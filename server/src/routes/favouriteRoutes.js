@@ -13,7 +13,7 @@ const {
 // Favourite Routes
 // ==================================================
 
-// Add a service to the customer's favourites
+// Retrieve the customer's favourite services
 favouriteRouter.get("/list", protect, getFavourite);
 
 // Add a service to the customer's favourites
