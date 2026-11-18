@@ -10,35 +10,68 @@ const Hero = () => {
 
   const { axios } = useAppContext();
 
-  // Store the hero background image
-  const [heroBackground, setHeroBackground] = useState(hero_bg);
+  // Store hero images after loading settings
+  const [heroBackground, setHeroBackground] = useState(null);
+  const [heroImage, setHeroImage] = useState(null);
 
-  // Store the right-side hero image
-  const [heroImage, setHeroImage] = useState(assets.hero_photo);
+  // Track whether the images are ready
+  const [isHeroLoading, setIsHeroLoading] = useState(true);
 
   // Fetch Hero settings from MySQL
   useEffect(() => {
+    let cancelled = false;
+
+    const preloadImage = (src) =>
+      new Promise((resolve) => {
+        const image = new Image();
+
+        image.onload = () => resolve(src);
+        image.onerror = () => resolve(null);
+
+        image.src = src;
+      });
+
     const fetchHeroSettings = async () => {
       try {
         // Get saved hero images from the backend
         const response = await axios.get("/api/settings/hero");
 
-        if (response.data.success) {
-          // Update background image if available
-          if (response.data.heroBackground) {
-            setHeroBackground(response.data.heroBackground);
-          }
+        const background = response.data.success
+          ? response.data.heroBackground || hero_bg
+          : hero_bg;
 
-          // Update right-side image if available
-          if (response.data.heroImage) {
-            setHeroImage(response.data.heroImage);
-          }
+        const rightImage = response.data.success
+          ? response.data.heroImage || assets.hero_photo
+          : assets.hero_photo;
+
+        // Wait untill both images have loaded
+        const [loadedBackground, loadedRightImage] = await Promise.all([
+          preloadImage(background),
+          preloadImage(rightImage),
+        ]);
+
+        if (!cancelled) {
+          setHeroBackground(loadedBackground || hero_bg);
+          setHeroImage(loadedRightImage || assets.hero_photo);
         }
       } catch (error) {
         console.error("Failed to fetch hero settings:", error);
+
+        if (!cancelled) {
+          setHeroBackground(hero_bg);
+          setHeroImage(assets.hero_photo);
+        }
+      } finally {
+        if (!cancelled) {
+          setIsHeroLoading(false);
+        }
       }
     };
     fetchHeroSettings();
+
+    return () => {
+      cancelled = true;
+    };
   }, [axios]);
 
   const services = [
@@ -78,11 +111,14 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center overflow-hidden px-6 bg-background">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
-          src={heroBackground}
-          alt="Hero background image"
-          className="w-full h-full object-cover opacity-70"
-        />
+        {heroBackground && (
+          <img
+            src={heroBackground}
+            alt="Hero background image"
+            aria-hidden="true"
+            className={`w-full h-full object-cover opacity-70 transition-opacity duration-500 ${isHeroLoading ? "opacity-0" : "opacity-70"}`}
+          />
+        )}
         <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/80 to-background" />
       </div>
 
@@ -158,11 +194,15 @@ const Hero = () => {
             <div className="relative max-w-md mx-auto">
               <div className="absolute inset-0 rounded-3xl bg-linear-to-br from-secondary/30 via-transparent to-secondary/10 blur-2xl animate-pulse"></div>
               <div className="relative glass rounded-3xl p-2 glow-border">
-                <img
-                  src={heroImage}
-                  alt="Bob's Garage"
-                  className="w-full aspect-4/5 object-cover rounded-2xl"
-                />
+                {heroImage ? (
+                  <img
+                    src={heroImage}
+                    alt="Bob's Garage"
+                    className="w-full aspect-4/5 object-cover rounded-2xl"
+                  />
+                ) : (
+                  <div className="w-full aspect-4/5 rounded-2xl bg-secondary/20 animate-pulse" />
+                )}
 
                 <div className="absolute -top-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
                   <div className="text-2xl font-bold text-primary">10+</div>
