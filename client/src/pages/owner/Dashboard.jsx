@@ -74,7 +74,7 @@ const Dashboard = () => {
   }, [isAdmin]);
 
   return (
-    <div className="px-4 pt-10 md:px-10 flex-1">
+    <div className="px-4 pt-10 md:px-10 flex-1 border border-border">
       {/* Dashboard title */}
       <Title
         title="Admin Dashboard"
