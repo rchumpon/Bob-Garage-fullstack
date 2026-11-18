@@ -39,7 +39,7 @@ const Navbar = () => {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`flex items-center justify-between gap-8 px-6 md:px-16 lg:px-24 xl:px-32 py-6 text-foreground border-b border-border relative transition-all  ${location.pathname === "/" ? "bg-background" : "bg-card"}`}
+      className={`flex items-center justify-between gap-4 lg:gap-8 px-6 md:px-8 lg:px-12 xl:px-16 py-6 text-foreground border-b border-border relative transition-all  ${location.pathname === "/" ? "bg-background" : "bg-card"}`}
     >
       {/* Logo */}
       <Link to="/" className="flex shrink-0 items-center gap-2">
@@ -59,14 +59,14 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div
-        className={`max-sm:fixed max-sm:h-screen max-sm:w-full max-sm:top-16 max-sm:border-t border-border right-0 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 max-sm:p-4 transition-all duration-300 z-50 ${location.pathname === "/" ? "bg-background" : "bg-card"} ${open ? "max-sm:translate-x-0" : "max-sm:translate-x-full"}`}
+        className={`max-lg:fixed max-lg:h-screen max-lg:w-full max-lg:top-16 max-lg:border-t border-border right-0 flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:gap-5 max-lg:p-4 transition-all duration-300 z-50 ${location.pathname === "/" ? "bg-background" : "bg-card"} ${open ? "max-lg:translate-x-0" : "max-lg:translate-x-full"}`}
       >
         {navLinks.map((link, index) => (
           <Link
             key={index}
             to={link.path}
             onClick={() => setOpen(false)}
-            className={`relative w-fit font-medium transition-colors duration-300 hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 ${location.pathname === link.path ? "text-primary after:w-full" : "text-foreground"}`}
+            className={`relative w-fit whitespace-nowrap font-medium transition-colors duration-300 hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 ${location.pathname === link.path ? "text-primary after:w-full" : "text-foreground"}`}
           >
             {link.name}
           </Link>
@@ -77,7 +77,7 @@ const Navbar = () => {
           <Link
             to="/my-booking"
             onClick={() => setOpen(false)}
-            className={`relative w-fit font-medium transition-colors duration-300 hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${
+            className={`relative w-fit whitespace-nowrap font-medium transition-colors duration-300 hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${
               location.pathname === "/my-booking"
                 ? "text-primary after:w-full"
                 : "text-foreground"
@@ -90,7 +90,7 @@ const Navbar = () => {
         {/* Search bar */}
         <form
           onSubmit={handleSearch}
-          className="hidden lg:flex items-center gap-2 max-w-56 w-full h-10 px-3 rounded-full border border-gray-200 bg-gray-100 shadow-sm transition-colors focus-within:border-gray-400"
+          className="hidden lg:flex items-center gap-2 w-36 xl:w-48 shrink-0 h-10 px-3 rounded-full border border-gray-200 bg-gray-100 shadow-sm transition-colors focus-within:border-gray-400"
         >
           {/*  className="hidden lg:flex items-center text-sm gap-2 border border-border px-3 rounded-full max-w-56" */}
           <input
@@ -110,7 +110,7 @@ const Navbar = () => {
         </form>
 
         {/* Admin Dashboard Theme Toggle and Login/Logout */}
-        <div className="flex max-sm:flex-col items-start sm:items-center gap-4">
+        <div className="flex max-lg:flex-col items-start lg:items-center gap-4">
           {/* Only show Dashboard button for administrators */}
           {isAdmin && (
             <button
@@ -118,7 +118,7 @@ const Navbar = () => {
                 navigate("/owner");
                 setOpen(false);
               }}
-              className="cursor-pointer"
+              className="cursor-pointer whitespace-nowrap"
             >
               Dashboard
             </button>
@@ -132,7 +132,7 @@ const Navbar = () => {
             onClick={() => {
               user ? logout() : setShowLogin(true);
             }}
-            className="cursor-pointer px-8 py-2 bg-primary hover:bg-highlight transition-all text-white rounded-lg"
+            className="cursor-pointer whitespace-nowrap px-5 py-2 bg-primary hover:bg-highlight transition-all text-white rounded-lg"
           >
             {user ? "Logout" : "Login"}
           </button>
@@ -141,7 +141,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Button */}
       <button
-        className="sm:hidden cursor-pointer"
+        className="lg:hidden cursor-pointer shrink-0"
         aria-label="Menu"
         onClick={() => setOpen(!open)}
       >
