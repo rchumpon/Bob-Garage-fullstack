@@ -29,5 +29,3 @@ dist-ssr
 # MySQL database exports
 *.sql
 
-# Aiven SSL certificates
-*.pem
