@@ -310,10 +310,10 @@ const ServiceDetails = () => {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
-          className="shadow-lg h-max sticky top-18 rounded-xl p-6 space-y-6 bg-card text-foreground border border-border"
+          className="w-full min-w-0 max-w-full h-max rounded-xl border border-border bg-card p-4 text-foreground space-y-6 shadow-lg sm:p-6 lg:sticky lg:top-18"
         >
           <div>
-            <p className="text-2xl text-primary font-semibold">
+            <p className="text-2xl text-primary font-semibold sm:text-2xl">
               Request a Service
             </p>
             <p className="text-sm text-muted-foreground mt-2">
@@ -324,7 +324,7 @@ const ServiceDetails = () => {
           <hr className="border-primary" />
 
           {/* Date */}
-          <div className="flex flex-col gap-2">
+          <div className="flex min-w-0 flex-col gap-2">
             <label htmlFor="service-date">Preferred Date</label>
             <input
               onChange={handleBookingChange}
@@ -332,13 +332,13 @@ const ServiceDetails = () => {
               id="service-date"
               name="date"
               value={booking.date}
-              className=" w-full border border-border bg-background text-foreground placeholder:text-muted-foreground px-3 py-2 rounded-lg outline-none focus:border-primary"
+              className="block w-full min-w-0 max-w-full border border-border bg-background text-foreground placeholder:text-muted-foreground px-3 py-2 rounded-lg outline-none focus:border-primary"
               required
             />
           </div>
 
           {/* Time */}
-          <div className="flex flex-col gap-2">
+          <div className="flex min-w-0 flex-col gap-2">
             <label htmlFor="service-time">Preferred Time</label>
 
             <input
@@ -347,7 +347,7 @@ const ServiceDetails = () => {
               id="service-time"
               name="time"
               value={booking.time}
-              className="w-full border border-border bg-background text-foreground placeholder:text-muted-foreground px-3 py-2 rounded-lg outline-none focus:border-primary"
+              className="block w-full min-w-0 max-w-full border border-border bg-background text-foreground placeholder:text-muted-foreground px-3 py-2 rounded-lg outline-none focus:border-primary"
               required
             />
           </div>

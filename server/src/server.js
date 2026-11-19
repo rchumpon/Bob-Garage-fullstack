@@ -39,8 +39,21 @@ const app = express();
 // ==================================================
 // Add security-related HTTP headers
 app.use(helmet());
+
+// Allowed frontend origins
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://bob-garage-fullstack-7ufr.vercel.app",
+];
+
 // Enable Cross-Origin Resource Sharing
-app.use(cors());
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "token"],
+  }),
+);
 // Parse incoming JSON requests
 app.use(express.json());
 // Parse URL-encoded form submissions
