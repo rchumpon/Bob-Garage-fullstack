@@ -1,6 +1,15 @@
 const { Sequelize } = require("sequelize");
 const mysql2 = require("mysql2");
+const fs = require("fs");
+const path = require("path");
 
+// Load Aiven CA certificate
+const ca = fs.readFileSync(
+  path.join(__dirname, "../../certificates/ca.pem"),
+  "utf8",
+);
+
+// Create Sequelize connection
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -10,30 +19,19 @@ const sequelize = new Sequelize(
     port: Number(process.env.DB_PORT),
     dialect: "mysql",
 
-    // Explicitly provide the MySQL driver
+    // MySQL driver
     dialectModule: mysql2,
 
-    // Aiven MySQL SSL configuration
+    // Aiven SSL configuration
     dialectOptions: {
       ssl: {
-        ca: process.env.DB_CA_CERT?.replace(/\\n/g, "\n"),
+        ca: ca,
         rejectUnauthorized: true,
       },
     },
+
+    logging: false,
   },
 );
 
 module.exports = sequelize;
-
-// const { Sequelize } = require("sequelize");
-
-// const sequelize = new Sequelize(
-//   process.env.DB_NAME,
-//   process.env.DB_USER,
-//   process.env.DB_PASSWORD,
-//   {
-//     host: process.env.DB_HOST,
-//     dialect: "mysql",
-//   },
-// );
-// module.exports = sequelize;
