@@ -270,6 +270,24 @@ export const servicesInfo = [
       "General safety assessment",
     ],
   },
+  {
+    id: "10",
+    name: "Transmission Service",
+    category: "Transmission",
+    description:
+      "Transmission fluid inspection and servicing to ensure smooth gear changes and reliable vehicle performance.",
+    image: "",
+    priceFrom: 180,
+    duration: "1-2 hrs",
+    isPopular: false,
+
+    features: [
+      "Transmission fluid inspection",
+      "Transmission fluid replacement",
+      "Gear shifting performance check",
+      "Transmission leak inspection",
+    ],
+  },
 ];
 
 export const dummyUserData = [

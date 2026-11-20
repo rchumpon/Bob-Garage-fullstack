@@ -152,6 +152,7 @@ const Footer = () => {
                 "Suspension",
                 "Wheel Balancing",
                 "Full Car Servicing",
+                "Transmission",
               ].map((service) => (
                 <li key={service}>
                   <Link

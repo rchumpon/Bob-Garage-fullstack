@@ -232,6 +232,7 @@ const EditService = () => {
             <option value="Maintenance">Maintenance</option>
             <option value="Wheel Balancing">Wheel Balancing</option>
             <option value="Inspection">Inspection</option>
+            <option value="Transmission">Transmission</option>
           </select>
         </div>
 
