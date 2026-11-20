@@ -332,7 +332,7 @@ const ServiceDetails = () => {
               id="service-date"
               name="date"
               value={booking.date}
-              className="block w-full min-w-0 max-w-full border border-border bg-background text-foreground placeholder:text-muted-foreground px-3 py-2 rounded-lg outline-none focus:border-primary"
+              className="block box-border w-full min-w-0 max-w-full appearance-none rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground px-3 py-2 outline-none focus:border-primary"
               required
             />
           </div>
@@ -347,7 +347,7 @@ const ServiceDetails = () => {
               id="service-time"
               name="time"
               value={booking.time}
-              className="block w-full min-w-0 max-w-full border border-border bg-background text-foreground placeholder:text-muted-foreground px-3 py-2 rounded-lg outline-none focus:border-primary"
+              className="block box-border w-full min-w-0 max-w-full appearance-none border border-border bg-background text-foreground placeholder:text-muted-foreground px-3 py-2 rounded-lg outline-none focus:border-primary"
               required
             />
           </div>

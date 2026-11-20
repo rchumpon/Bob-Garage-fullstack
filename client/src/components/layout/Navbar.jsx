@@ -66,7 +66,7 @@ const Navbar = () => {
             key={index}
             to={link.path}
             onClick={() => setOpen(false)}
-            className={`relative w-fit whitespace-nowrap font-medium transition-colors duration-300 hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300  hover:after:w-full ${location.pathname === link.path ? "text-primary after:w-full" : "text-foreground"}`}
+            className={`relative w-fit whitespace-nowrap font-medium transition-colors duration-300 hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${location.pathname === link.path ? "text-primary after:w-full" : "text-foreground"}`}
           >
             {link.name}
           </Link>
@@ -77,10 +77,10 @@ const Navbar = () => {
           <Link
             to="/my-booking"
             onClick={() => setOpen(false)}
-            className={`relative w-fit whitespace-nowrap font-medium transition-colors duration-300 hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${
+            className={`relative w-fit whitespace-nowrap font-medium transition-colors duration-300 hover:text-primary after:content-[""] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${
               location.pathname === "/my-booking"
                 ? "text-primary after:w-full!"
-                : "text-foreground"
+                : "text-foreground after:w-0 "
             }`}
           >
             My Booking
