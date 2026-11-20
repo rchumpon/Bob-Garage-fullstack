@@ -384,7 +384,7 @@ const ServiceDetails = () => {
                 placeholder="e.g. Toyota"
                 value={booking.vehicleMake}
                 required
-                className="w-full border border-border bg-background text-foreground placeholder:text-muted-foreground px-3 py-2 rounded-lg outline-none focus:text-primary"
+                className="w-full border border-border bg-background text-foreground placeholder:text-muted-foreground px-3 py-2 rounded-lg outline-none focus:border-primary"
               />
             </div>
 

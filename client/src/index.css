@@ -17,12 +17,26 @@ input[type="time"] {
   min-width: 0;
   max-width: 100%;
   box-sizing: border-box;
+  color-scheme: light;
 }
 
+/* Fix date and time alignment on iOS Safari */
 input[type="date"]::-webkit-date-and-time-value,
 input[type="time"]::-webkit-date-and-time-value {
   min-width: 0;
   text-align: left;
+}
+
+/* Use light-coloured icons in dark mode */
+.dark input[type="date"],
+.dark input[type="time"] {
+  color-scheme: dark;
+}
+
+/* Improve calendar and clock icon visibility */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
 }
 
 /* Enable class-based dark mode in Tailwind CSS v4 */
